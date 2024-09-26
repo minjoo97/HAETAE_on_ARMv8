@@ -2,7 +2,7 @@
 //  mont_vec.s
 //  HAETAE2_vec
 //
-//  Created by 심민주 on 5/1/24.
+//  Created by Minjoo on 5/1/24.
 //
 
 .globl mont_vec
@@ -56,10 +56,10 @@ loop_i:
 
     mul.4s v6, v6, v4
 
-    smlsl v7.2d, v6.2s, v3.2s //하위
+    smlsl v7.2d, v6.2s, v3.2s
     sshr.2d v7, v7, #32
 
-    smlsl2 v27.2d, v6.4s, v3.4s //상위
+    smlsl2 v27.2d, v6.4s, v3.4s 
     sshr.2d v27, v27, #32
     
     XTN  v6.2s, v7.2d

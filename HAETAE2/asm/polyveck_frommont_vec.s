@@ -2,7 +2,7 @@
 //  polyveck_frommont_vec.s
 //  HAETAE2_vec
 //
-//  Created by 심민주 on 5/1/24.
+//  Created by Minjoo on 5/1/24.
 //
 .globl polyveck_frommont
 .globl _polyveck_frommont

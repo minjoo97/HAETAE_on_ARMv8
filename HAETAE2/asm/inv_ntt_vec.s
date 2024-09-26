@@ -2,7 +2,7 @@
 //  inv_ntt_vec.s
 //  HAETAE2_asm
 //
-//  Created by 심민주 on 5/6/24.
+//  Created by Minjoo on 5/6/24.
 //
 .globl invntt_tomont
 .globl _invntt_tomont
@@ -47,10 +47,10 @@
 .macro mont_reduce
     mul.4s v9, v9, v4
     
-    smlsl v7.2d, v9.2s, v3.2s //하위
+    smlsl v7.2d, v9.2s, v3.2s
     sshr.2d v7, v7, #32
     
-    smlsl2 v27.2d, v9.4s, v3.4s //상위
+    smlsl2 v27.2d, v9.4s, v3.4s
     sshr.2d v27, v27, #32
     
     XTN  v9.2s, v7.2d
@@ -60,17 +60,17 @@
 .macro mont_reduce_2
     mul.4s v0, v0, v4
 
-    smlsl v7.2d, v0.2s, v3.2s //하위
+    smlsl v7.2d, v0.2s, v3.2s
     sshr.2d v7, v7, #32
 
-    smlsl2 v27.2d, v0.4s, v3.4s //상위
+    smlsl2 v27.2d, v0.4s, v3.4s
     sshr.2d v27, v27, #32
 
     XTN  v0.2s, v7.2d
     XTN2 v0.4s, v27.2d
 .endm
 
-.macro len1 //8개 한 번에
+.macro len1
     mov         x13, #32
     loop_zeta7:
         ld1        {v2.4s}, [x1],#16         //zeta
@@ -113,7 +113,7 @@ shsub.4s    v6, v6, v16
         cbnz        x13, loop_zeta7
 .endm
 
-.macro len2 //4개 한 번에
+.macro len2
 mov         x13, #32
 loop_zeta6:
     ld1R        {v2.4s}, [x1],#4         //zeta
@@ -129,12 +129,12 @@ loop_zeta6:
     add.4s      v8, v9, v6
     sub.4s      v9, v6, v9
 
-   sqdmulh v6.4s, v0.4s, v2.4s //하위
+   sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
     
 
@@ -165,12 +165,12 @@ loop_i4:
     add.4s      v1, v0, v6
     sub.4s      v0, v6, v0
 
-   sqdmulh v6.4s, v0.4s, v2.4s //하위
+   sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
 
     ST1         {v0.4s}, [x0]
@@ -199,12 +199,12 @@ loop_i8:
     add.4s      v1, v0, v6
     sub.4s      v0, v6, v0
 
-   sqdmulh v6.4s, v0.4s, v2.4s //하위
+   sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
 
     
@@ -233,12 +233,12 @@ loop_i16:
     add.4s      v1, v0, v6
     sub.4s      v0, v6, v0
 
-    sqdmulh v6.4s, v0.4s, v2.4s //하위
+    sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
     
     ST1         {v0.4s}, [x0]
@@ -267,12 +267,12 @@ loop_i32:
     add.4s      v1, v0, v6
     sub.4s      v0, v6, v0
     
-   sqdmulh v6.4s, v0.4s, v2.4s //하위
+   sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
         
     ST1         {v0.4s}, [x0]
@@ -303,12 +303,12 @@ loop_i64:
         add.4s      v1, v0, v6
         sub.4s      v0, v6, v0
         
-        sqdmulh v6.4s, v0.4s, v2.4s //하위
+        sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
         
         ST1         {v0.4s}, [x0]
@@ -335,12 +335,12 @@ shsub.4s    v6, v6, v16
         add.4s      v1, v0, v6
         sub.4s      v0, v6, v0
         
-       sqdmulh v6.4s, v0.4s, v2.4s //하위
+       sqdmulh v6.4s, v0.4s, v2.4s
 mul.4s  v27, v2, v4
 
 mul.4s  v7, v0, v27
 
-sqdmulh v16.4s, v7.4s, v3.4s //하위
+sqdmulh v16.4s, v7.4s, v3.4s
 shsub.4s    v6, v6, v16
 
         ST1         {v0.4s}, [x0]
@@ -358,26 +358,25 @@ mk_Q //v3
 mk_Q_Inv  //v4
 
 len1
-add     x0, x0, #-1024       ///
+add     x0, x0, #-1024
 
 len2
-add     x0, x0, #-1024      //
+add     x0, x0, #-1024
 
 len4
-add     x0, x0, #-1024       //
+add     x0, x0, #-1024
 
 len8
-add     x0, x0, #-1024       //
+add     x0, x0, #-1024
 
 len16
-add     x0, x0, #-1024       //
+add     x0, x0, #-1024
 
 len32
-add     x0, x0, #-1024       //
+add     x0, x0, #-1024
 
 len64
-add     x0, x0, #-1024       //192*4 + 128
-
+add     x0, x0, #-1024
 len128
 add     x0, x0, #-512
 

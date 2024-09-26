@@ -2,7 +2,7 @@
 //  poly_pp_mont_vec.s
 //  HAETAE2_vec
 //
-//  Created by 심민주 on 4/29/24.
+//  Created by Minjoo on 4/29/24.
 //
 .globl poly_pointwise_montgomery
 .globl _poly_pointwise_montgomery
@@ -84,24 +84,3 @@ loop_i:
 
 
 ret
-
-/*
- SMULL   v26.2d, v7.2s, v4.2s
- SMULL2  v24.2d, v7.4s, v4.4s
- XTN  v6.2s, v26.2d
- XTN2 v6.4s, v24.2d
- */
-
-/*
- (7) XTN v28.2s, v26.2d
- (8) XTN2 v28.4s, v24.2d
-MUL v28.4s,v28.4s,v30.4s
-SMLSL v26.2d, v28.2s, v29.2s
-SSHR v26.2d, v26.2d, #32
- SMLSL2 v24.2d, v28.4s, v29.4s (
-SSHR v24.2d, v24.2d, #32
- XTN        v25.2s, v26.2d
-XTN2   v25.4s, v24.2d
- ADD    out1\.4s, v25.4s, \in1\.4s
- SUB    out2\.4s, \in1\.4s, v25.4s
- */

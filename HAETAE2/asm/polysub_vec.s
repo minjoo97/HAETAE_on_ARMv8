@@ -2,7 +2,7 @@
 //  polysub_vec.s
 //  HAETAE2_vec
 //
-//  Created by 심민주 on 4/29/24.
+//  Created by Minjoo on 4/29/24.
 //
 .globl poly_sub
 .globl _poly_sub

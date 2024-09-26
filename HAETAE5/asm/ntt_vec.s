@@ -2,7 +2,7 @@
 //  ntt_vec.s
 //  HAETAE2_vec
 //
-//  Created by 심민주 on 4/30/24.
+//  Created by Minjoo on 4/30/24.
 //
 
 .globl ntt
@@ -48,10 +48,10 @@
 .macro mont_reduce
     mul.4s v6, v6, v4
     
-    smlsl v7.2d, v6.2s, v3.2s //하위
+    smlsl v7.2d, v6.2s, v3.2s
     sshr.2d v7, v7, #32
     
-    smlsl2 v27.2d, v6.4s, v3.4s //상위
+    smlsl2 v27.2d, v6.4s, v3.4s
     sshr.2d v27, v27, #32
     
     XTN  v6.2s, v7.2d
@@ -242,7 +242,7 @@ loop_i4:
     cbnz        x13, loop_zeta5
 .endm
 
-.macro len2 //4개 한 번에
+.macro len2
 mov         x13, #32
 loop_zeta6:
     ld1R        {v2.4s}, [x1],#4         //zeta
@@ -262,10 +262,10 @@ loop_zeta6:
     
     mul.4s      v6, v6, v4
     
-    smlsl       v7.2d, v6.2s, v3.2s //하위
+    smlsl       v7.2d, v6.2s, v3.2s
     sshr.2d     v7, v7, #32
     
-    smlsl2      v27.2d, v6.4s, v3.4s //상위
+    smlsl2      v27.2d, v6.4s, v3.4s
     sshr.2d     v27, v27, #32
     
     XTN         v6.2s, v7.2d
@@ -286,7 +286,7 @@ loop_zeta6:
 .endm
 
 
-.macro len1 //8개 한 번에
+.macro len1 
 mov         x13, #32
 loop_zeta7:
     ld1        {v2.4s}, [x1],#16         //zeta
@@ -316,10 +316,10 @@ loop_zeta7:
     
     mul.4s      v6, v6, v4
     
-    smlsl       v7.2d, v6.2s, v3.2s //하위
+    smlsl       v7.2d, v6.2s, v3.2s
     sshr.2d     v7, v7, #32
     
-    smlsl2      v27.2d, v6.4s, v3.4s //상위
+    smlsl2      v27.2d, v6.4s, v3.4s
     sshr.2d     v27, v27, #32
     
     XTN         v6.2s, v7.2d
